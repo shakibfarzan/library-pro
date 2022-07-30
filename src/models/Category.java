@@ -3,14 +3,15 @@ package models;
 import utils.Generator;
 
 import java.io.Serializable;
+import static utils.Generator.idGenerator;
 
 public class Category implements Serializable {
-    private int id;
+    private final int id;
     private String name;
 
     public Category(String name) {
         this.name = name;
-        this.id = Generator.idGenerator(name);
+        this.id = idGenerator(name);
     }
 
     public void setName(String name) {

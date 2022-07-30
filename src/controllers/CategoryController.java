@@ -7,10 +7,13 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class CategoryController {
-    private static String path = "categories";
+    private static final String path = "categories";
     private static CategoryController instance;
     private HashMap<String, Category> categories;
-    private CategoryController() {}
+    private CategoryController() {
+        categories = (HashMap<String, Category>) FileIO.getInstance().readObjFile(path);
+        if (categories == null) categories = new HashMap<>();
+    }
 
     public static CategoryController getInstance() {
         if (instance == null){
@@ -20,9 +23,6 @@ public class CategoryController {
     }
 
     public Collection<Category> getCategories(){
-        if (categories == null) {
-            categories = (HashMap<String, Category>) FileIO.getInstance().readObjFile(path);
-        }
         return categories.values();
     }
 
@@ -44,5 +44,9 @@ public class CategoryController {
         category.setName(newName);
         categories.put(newName, category);
         return true;
+    }
+
+    public void writeToFile() {
+        FileIO.getInstance().writeObjToFile(path, categories);
     }
 }

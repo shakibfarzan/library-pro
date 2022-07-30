@@ -24,6 +24,8 @@ public class FileIO {
             objectIn.close();
             return obj;
 
+        } catch (FileNotFoundException ex) {
+            return null;
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
             return null;
