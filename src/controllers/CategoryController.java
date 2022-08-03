@@ -24,24 +24,22 @@ public class CategoryController {
         return categories.values();
     }
 
-    public boolean addCategory(String name) {
-        if (categories.get(name) != null) return false;
+    public void addCategory(String name) throws Exception {
+        if (categories.get(name) != null) throw new Exception("Category with name "+name+" exists!");
         Category category = new Category(name);
         categories.put(name, category);
-        return true;
     }
 
-    public boolean removeCategoryByName(String name) {
+    public void removeCategoryByName(String name) throws Exception {
         Category category = categories.remove(name);
-        return category != null;
+        if (category == null) throw new Exception("Category with name "+name+" was not found!");
     }
 
-    public boolean updateCategory(String currentName, String newName) {
+    public void updateCategory(String currentName, String newName) throws Exception {
         Category category = categories.remove(currentName);
-        if (category == null) return false;
+        if (category == null) throw new Exception("Category with name "+currentName+" was not found!");
         category.setName(newName);
         categories.put(newName, category);
-        return true;
     }
 
     public void writeToFile() {

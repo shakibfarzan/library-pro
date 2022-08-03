@@ -24,23 +24,22 @@ public class AuthorController {
         return authors.values();
     }
 
-    public boolean addAuthor(String firstName, String lastName) {
+    public void addAuthor(String firstName, String lastName) {
         Author author = new Author(firstName, lastName);
         authors.put(author.getId(), author);
-        return true;
     }
 
-    public boolean removeAuthorById(int id) {
-        return authors.remove(id) != null;
+    public void removeAuthorById(int id) throws Exception {
+        Author author = authors.remove(id);
+        if (author == null) throw new Exception("Author with id "+id+" was not found!");
     }
 
-    public boolean updateAuthorName(String firstName, String lastName, int id){
+    public void updateAuthorName(String firstName, String lastName, int id) throws Exception {
         Author author = authors.get(id);
-        if (author == null) return false;
+        if (author == null) throw new Exception("Author with id "+id+" was not found!");
         author.setFirstName(firstName);
         author.setLastName(lastName);
         authors.put(id, author);
-        return true;
     }
 
     public void writeToFile() {
