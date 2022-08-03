@@ -8,12 +8,14 @@ public class Book {
     private String fileUrl;
     private boolean hasRead;
     private Category category;
+    private Author author;
 
-    public Book(String title, String fileUrl, Category category){
+    public Book(String title, String fileUrl, Category category, Author author){
         id = idGenerator(title);
         this.title = title;
         this.fileUrl = fileUrl;
         this.category = category;
+        this.author = author;
         hasRead = false;
     }
 
@@ -37,6 +39,10 @@ public class Book {
         return fileUrl;
     }
 
+    public Author getAuthor() {
+        return author;
+    }
+
     public void setCategory(Category category) {
         this.category = category;
     }
@@ -51,6 +57,10 @@ public class Book {
 
     public void setFileUrl(String fileUrl) {
         this.fileUrl = fileUrl;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     @Override

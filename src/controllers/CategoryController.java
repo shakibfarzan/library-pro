@@ -16,9 +16,7 @@ public class CategoryController {
     }
 
     public static CategoryController getInstance() {
-        if (instance == null){
-            instance = new CategoryController();
-        }
+        if (instance == null) instance = new CategoryController();
         return instance;
     }
 
