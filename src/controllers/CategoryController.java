@@ -7,11 +7,11 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class CategoryController {
-    private static final String path = "categories";
+    private static final String PATH = "categories";
     private static CategoryController instance;
     private HashMap<String, Category> categories;
     private CategoryController() {
-        categories = (HashMap<String, Category>) FileIO.getInstance().readObjFile(path);
+        categories = (HashMap<String, Category>) FileIO.getInstance().readObjFile(PATH);
         if (categories == null) categories = new HashMap<>();
     }
 
@@ -42,7 +42,13 @@ public class CategoryController {
         categories.put(newName, category);
     }
 
+    public Category getCategoryByName(String name) throws Exception {
+        Category category = categories.get(name);
+        if (category == null) throw new Exception("Category with name "+name+" was not found!");
+        return category;
+    }
+
     public void writeToFile() {
-        FileIO.getInstance().writeObjToFile(path, categories);
+        FileIO.getInstance().writeObjToFile(PATH, categories);
     }
 }

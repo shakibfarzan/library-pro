@@ -1,9 +1,13 @@
 package program;
 
 import controllers.CategoryController;
+import views.MainFrame;
+
+
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(CategoryController.getInstance().getCategories());
+        MainFrame mainFrame = new MainFrame();
+        mainFrame.setVisible(true);
     }
 }

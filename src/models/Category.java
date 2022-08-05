@@ -3,6 +3,8 @@ package models;
 import utils.Generator;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import static utils.Generator.idGenerator;
 
 public class Category implements Serializable {
@@ -29,5 +31,18 @@ public class Category implements Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(name, category.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

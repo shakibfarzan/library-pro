@@ -7,11 +7,11 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class AuthorController {
-    private final static String path = "authors";
+    private final static String PATH = "authors";
     private static AuthorController instance;
     private HashMap<Integer, Author> authors;
     private AuthorController() {
-        authors = (HashMap<Integer, Author>) FileIO.getInstance().readObjFile(path);
+        authors = (HashMap<Integer, Author>) FileIO.getInstance().readObjFile(PATH);
         if (authors == null) authors = new HashMap<>();
     }
 
@@ -35,14 +35,19 @@ public class AuthorController {
     }
 
     public void updateAuthorName(String firstName, String lastName, int id) throws Exception {
-        Author author = authors.get(id);
-        if (author == null) throw new Exception("Author with id "+id+" was not found!");
+        Author author = getAuthorById(id);
         author.setFirstName(firstName);
         author.setLastName(lastName);
         authors.put(id, author);
     }
 
+    public Author getAuthorById(int id) throws Exception {
+        Author author = authors.get(id);
+        if (author == null) throw new Exception("Author with id "+id+" was not found!");
+        return author;
+    }
+
     public void writeToFile() {
-        FileIO.getInstance().writeObjToFile(path, authors);
+        FileIO.getInstance().writeObjToFile(PATH, authors);
     }
 }
