@@ -8,25 +8,25 @@ public class Book {
     private final int id;
     private String title;
     private String fileUrl;
-    private boolean hasRead;
+    private ReadingStatus readingStatus;
     private Category category;
     private Author author;
 
-    public Book(String title, String fileUrl, Category category, Author author){
+    public Book(String title, String fileUrl, Category category, Author author, ReadingStatus readingStatus){
         id = idGenerator(title);
         this.title = title;
         this.fileUrl = fileUrl;
         this.category = category;
         this.author = author;
-        hasRead = false;
+        this.readingStatus = readingStatus;
     }
 
     public int getId() {
         return id;
     }
 
-    public boolean hasRead() {
-        return hasRead;
+    public ReadingStatus getReadingStatus() {
+        return readingStatus;
     }
 
     public Category getCategory() {
@@ -49,8 +49,8 @@ public class Book {
         this.category = category;
     }
 
-    public void setHasRead(boolean hasRead) {
-        this.hasRead = hasRead;
+    public void setReadingStatus(ReadingStatus readingStatus) {
+        this.readingStatus = readingStatus;
     }
 
     public void setTitle(String title) {

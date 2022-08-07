@@ -1,0 +1,41 @@
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"title": "Add/Edit Book"
+			"type": enum java.awt.Window$Type UTILITY
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel"
+				"background": new java.awt.Color( 53, 0, 0, 255 )
+				"foreground": new java.awt.Color( 251, 207, 10, 255 )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JList" ) {
+						name: "bookList"
+						"background": new java.awt.Color( 251, 207, 10, 255 )
+						"foreground": new java.awt.Color( 53, 0, 0, 255 )
+						"visibleRowCount": 20
+						"selectionBackground": new java.awt.Color( 53, 0, 0, 255 )
+						"selectionForeground": new java.awt.Color( 251, 207, 10, 255 )
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 0
+					"y": 0
+					"width": 170
+					"height": 440
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 565
+				"height": 440
+				"x": 0
+				"y": 0
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 565, 470 )
+		} )
+	}
+}

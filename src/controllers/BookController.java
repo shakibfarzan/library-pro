@@ -3,6 +3,7 @@ package controllers;
 import models.Author;
 import models.Book;
 import models.Category;
+import models.ReadingStatus;
 import utils.FileIO;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,10 +27,10 @@ public class BookController {
         return books.values();
     }
 
-    public void addBook(String title, String fileUrl, String categoryName, int authorId) throws Exception {
+    public void addBook(String title, String fileUrl, ReadingStatus readingStatus, String categoryName, int authorId) throws Exception {
         Category category = CategoryController.getInstance().getCategoryByName(categoryName);
         Author author = AuthorController.getInstance().getAuthorById(authorId);
-        Book book = new Book(title, fileUrl, category, author);
+        Book book = new Book(title, fileUrl, category, author, readingStatus);
         books.put(book.getId(), book);
     }
 
@@ -38,18 +39,19 @@ public class BookController {
         if (book == null) throw new Exception("Book with id "+id+" was not found!");
     }
 
-    public void updateBook(String title, String fileUrl, String categoryName, int authorId, int id) throws Exception {
+    public void updateBook(String title, String fileUrl, ReadingStatus readingStatus, String categoryName, int authorId, int id) throws Exception {
         Book book = getBookById(id);
         book.setTitle(title);
         book.setFileUrl(fileUrl);
+        book.setReadingStatus(readingStatus);
         book.setAuthor(AuthorController.getInstance().getAuthorById(authorId));
         book.setCategory(CategoryController.getInstance().getCategoryByName(categoryName));
         books.put(id, book);
     }
 
-    public void updateHasReadBook(boolean hasRead, int id) throws Exception {
+    public void updateReadingStatus(ReadingStatus readingStatus, int id) throws Exception {
         Book book = getBookById(id);
-        book.setHasRead(hasRead);
+        book.setReadingStatus(readingStatus);
         books.put(id, book);
     }
 
@@ -59,21 +61,41 @@ public class BookController {
         return book;
     }
 
-    public ArrayList<Book> getBooksByCategoryName(String categoryName) throws Exception {
-        Category category = CategoryController.getInstance().getCategoryByName(categoryName);
-        ArrayList<Book> filteredBooks = new ArrayList<>();
-        for (Book book: books.values()) {
-            if (book.getCategory().equals(category)) filteredBooks.add(book);
-        }
-        return filteredBooks;
-    }
-
-    public ArrayList<Book> getBooksByAuthorId(int authorId) throws Exception {
-        Author author = AuthorController.getInstance().getAuthorById(authorId);
-        ArrayList<Book> filteredBooks = new ArrayList<>();
-        for (Book book: books.values()) {
-            if (book.getAuthor().equals(author)) filteredBooks.add(book);
-        }
+    public Collection<Book> getBooksByFiltering(String categoryName, Integer authorId, String readingStatus) throws Exception {
+        Collection<Book> filteredBooks = new ArrayList<>();
+        Category category = null;
+        Author author = null;
+        if (categoryName != null) category = CategoryController.getInstance().getCategoryByName(categoryName);
+        if (authorId != null) author = AuthorController.getInstance().getAuthorById(authorId);
+        if (categoryName != null && authorId != null && readingStatus != null) {
+            for (Book book: books.values())
+                if (book.getAuthor().equals(author) && book.getCategory().equals(category) && book.getReadingStatus().toString().equals(readingStatus))
+                    filteredBooks.add(book);
+        } else if (categoryName != null && authorId != null) {
+            for (Book book: books.values())
+                if (book.getAuthor().equals(author) && book.getCategory().equals(category))
+                    filteredBooks.add(book);
+        } else if (categoryName != null && readingStatus != null) {
+            for (Book book: books.values())
+                if (book.getCategory().equals(category) && book.getReadingStatus().toString().equals(readingStatus))
+                    filteredBooks.add(book);
+        } else if (authorId != null && readingStatus != null) {
+            for (Book book: books.values())
+                if (book.getAuthor().equals(author) && book.getReadingStatus().toString().equals(readingStatus))
+                    filteredBooks.add(book);
+        }else if (categoryName != null) {
+            for (Book book: books.values())
+                if (book.getCategory().equals(category))
+                    filteredBooks.add(book);
+        }else if (authorId != null) {
+            for (Book book: books.values())
+                if (book.getAuthor().equals(author))
+                    filteredBooks.add(book);
+        }else if (readingStatus != null) {
+            for (Book book: books.values())
+                if (book.getReadingStatus().toString().equals(readingStatus))
+                    filteredBooks.add(book);
+        } else return books.values();
         return filteredBooks;
     }
 

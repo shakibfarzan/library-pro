@@ -8,8 +8,6 @@ package views;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * @author unknown
@@ -18,26 +16,25 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         initComponents();
         setResizable(false);
+        imagePanel = new ImagePanel("book-image.jpg");
+        imagePanel.setBounds(425, 30, 425, 585);
+        panel.add(imagePanel);
+        setIconImage(new ImageIcon("icon.png").getImage());
     }
 
-    private void button1(ActionEvent e) {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Choose a file");
-        FileFilter fileFilter = new FileNameExtensionFilter("PDF", "pdf");
-        fileChooser.setFileFilter(fileFilter);
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION){
-
-        } else if (result == JFileChooser.CANCEL_OPTION){
-            System.out.println("Cancel");
-        }
+    private void viewBooksBtnHandler(ActionEvent e) {
+        setEnabled(false);
+        var viewBooksFrame = new ViewBooksFrame(this);
+        viewBooksFrame.setVisible(true);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel = new JPanel();
-        label1 = new JLabel();
-        button1 = new JButton();
+        viewBooksBtn = new JButton();
+        addEditBookBtn = new JButton();
+        addEditAuthorBtn = new JButton();
+        addEditCategoryBtn = new JButton();
 
         //======== this ========
         setBackground(new Color(155, 168, 61));
@@ -48,22 +45,58 @@ public class MainFrame extends JFrame {
 
         //======== panel ========
         {
-            panel.setBackground(new Color(255, 219, 226));
-            panel.setForeground(new Color(0, 35, 46));
+            panel.setBackground(new Color(53, 0, 0));
+            panel.setForeground(new Color(251, 207, 10));
             panel.setLayout(null);
 
-            //---- label1 ----
-            label1.setText("Label 1");
-            label1.setForeground(new Color(27, 32, 28));
-            label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 5f));
-            panel.add(label1);
-            label1.setBounds(700, 50, 85, 35);
+            //---- viewBooksBtn ----
+            viewBooksBtn.setText("View Books");
+            viewBooksBtn.setBackground(new Color(251, 207, 10));
+            viewBooksBtn.setForeground(new Color(53, 0, 0));
+            viewBooksBtn.setBorder(null);
+            viewBooksBtn.setBorderPainted(false);
+            viewBooksBtn.setFocusPainted(false);
+            viewBooksBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            viewBooksBtn.setFocusable(false);
+            viewBooksBtn.addActionListener(e -> viewBooksBtnHandler(e));
+            panel.add(viewBooksBtn);
+            viewBooksBtn.setBounds(25, 80, 370, 40);
 
-            //---- button1 ----
-            button1.setText("Choose File");
-            button1.addActionListener(e -> button1(e));
-            panel.add(button1);
-            button1.setBounds(225, 130, 130, button1.getPreferredSize().height);
+            //---- addEditBookBtn ----
+            addEditBookBtn.setText("Add/Edit Book");
+            addEditBookBtn.setBackground(new Color(251, 207, 10));
+            addEditBookBtn.setForeground(new Color(53, 0, 0));
+            addEditBookBtn.setBorder(null);
+            addEditBookBtn.setBorderPainted(false);
+            addEditBookBtn.setFocusable(false);
+            addEditBookBtn.setFocusPainted(false);
+            addEditBookBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            panel.add(addEditBookBtn);
+            addEditBookBtn.setBounds(25, 140, 370, 40);
+
+            //---- addEditAuthorBtn ----
+            addEditAuthorBtn.setText("Add/Edit Author");
+            addEditAuthorBtn.setBackground(new Color(251, 207, 10));
+            addEditAuthorBtn.setForeground(new Color(53, 0, 0));
+            addEditAuthorBtn.setBorder(null);
+            addEditAuthorBtn.setFocusPainted(false);
+            addEditAuthorBtn.setFocusable(false);
+            addEditAuthorBtn.setBorderPainted(false);
+            addEditAuthorBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            panel.add(addEditAuthorBtn);
+            addEditAuthorBtn.setBounds(25, 200, 370, 40);
+
+            //---- addEditCategoryBtn ----
+            addEditCategoryBtn.setText("Add/Edit Category");
+            addEditCategoryBtn.setBackground(new Color(251, 207, 10));
+            addEditCategoryBtn.setForeground(new Color(53, 0, 0));
+            addEditCategoryBtn.setBorder(null);
+            addEditCategoryBtn.setBorderPainted(false);
+            addEditCategoryBtn.setFocusable(false);
+            addEditCategoryBtn.setFocusPainted(false);
+            addEditCategoryBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            panel.add(addEditCategoryBtn);
+            addEditCategoryBtn.setBounds(25, 260, 370, 40);
 
             {
                 // compute preferred size
@@ -81,7 +114,7 @@ public class MainFrame extends JFrame {
             }
         }
         contentPane.add(panel);
-        panel.setBounds(0, -30, 850, 410);
+        panel.setBounds(0, -30, 850, 615);
 
         {
             // compute preferred size
@@ -104,8 +137,11 @@ public class MainFrame extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel;
-    private JLabel label1;
-    private JButton button1;
+    private JButton viewBooksBtn;
+    private JButton addEditBookBtn;
+    private JButton addEditAuthorBtn;
+    private JButton addEditCategoryBtn;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+    private ImagePanel imagePanel;
 
 }

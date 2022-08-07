@@ -1,0 +1,216 @@
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/icon.png" )
+			"resizable": false
+			"type": enum java.awt.Window$Type UTILITY
+			"title": "View Books"
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "thisWindowClosing", true ) )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel"
+				"background": new java.awt.Color( 53, 0, 0, 255 )
+				"foreground": new java.awt.Color( 251, 207, 10, 255 )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JList" ) {
+						name: "bookList"
+						"background": new java.awt.Color( 251, 207, 10, 255 )
+						"foreground": new java.awt.Color( 53, 0, 0, 255 )
+						"visibleRowCount": 20
+						"selectionBackground": new java.awt.Color( 53, 0, 0, 255 )
+						"selectionForeground": new java.awt.Color( 251, 207, 10, 255 )
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 0
+					"y": 0
+					"width": 170
+					"height": 440
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "filterByCategoryLbl"
+					"text": "Filter by category:"
+					"foreground": &Color0 new java.awt.Color( 251, 207, 10, 255 )
+					"font": &Font0 new java.awt.Font( "Segoe UI", 1, 14 )
+					"labelFor": new FormReference( "categoryComboBox" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 190
+					"y": 15
+					"width": 145
+					"height": 25
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "filterByAuthorLbl"
+					"text": "Filter by author:"
+					"foreground": #Color0
+					"font": #Font0
+					"labelFor": new FormReference( "authorComboBox" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 145
+					"height": 25
+					"x": 190
+					"y": 55
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "categoryComboBox"
+					"background": new java.awt.Color( 251, 207, 10, 255 )
+					"foreground": new java.awt.Color( 53, 0, 0, 255 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"focusable": false
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 380
+					"y": 15
+					"width": 155
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "authorComboBox"
+					"background": &Color1 new java.awt.Color( 251, 207, 10, 255 )
+					"foreground": &Color2 new java.awt.Color( 53, 0, 0, 255 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"focusable": false
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 380
+					"y": 55
+					"width": 155
+				} )
+				add( new FormComponent( "javax.swing.JSeparator" ) {
+					name: "separator"
+					"foreground": new java.awt.Color( 251, 207, 10, 255 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 170
+					"y": 135
+					"height": -2
+					"width": 395
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "titleLbl"
+					"text": "Title:"
+					"foreground": #Color0
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 75
+					"height": 25
+					"x": 190
+					"y": 220
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "authorLbl"
+					"text": "Author:"
+					"foreground": #Color0
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 75
+					"height": 25
+					"x": 190
+					"y": 255
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "categoryLbl"
+					"text": "Category:"
+					"foreground": #Color0
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 110
+					"height": 25
+					"x": 190
+					"y": 290
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "readingStatusValueLbl"
+					"text": "Reading Status"
+					"foreground": #Color0
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 105
+					"height": 25
+					"x": 440
+					"y": 145
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "filterByReadingLbl"
+					"text": "Filter by reading status:"
+					"foreground": #Color0
+					"font": #Font0
+					"labelFor": new FormReference( "readingStatusComboBox" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 175
+					"height": 25
+					"x": 190
+					"y": 95
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "readingStatusComboBox"
+					"background": #Color1
+					"foreground": #Color2
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"focusable": false
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 155
+					"height": 24
+					"x": 380
+					"y": 95
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "titleValueLbl"
+					"text": "Title Value"
+					"foreground": &Color3 new java.awt.Color( 255, 247, 160, 255 )
+					"font": &Font1 new java.awt.Font( "Segoe UI", 1, 12 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 250
+					"height": 25
+					"x": 305
+					"y": 220
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "authorValueLbl"
+					"text": "Author Value"
+					"foreground": #Color3
+					"font": #Font1
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 250
+					"height": 26
+					"x": 305
+					"y": 255
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "categoryValueLbl"
+					"text": "Category Value"
+					"foreground": #Color3
+					"font": #Font1
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 250
+					"height": 25
+					"x": 305
+					"y": 290
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "openFileBtn"
+					"text": "Open File"
+					"background": new java.awt.Color( 255, 247, 160, 255 )
+					"foreground": new java.awt.Color( 53, 0, 0, 255 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"borderPainted": false
+					"cursor": new java.awt.Cursor( 12 )
+					"focusable": false
+					"focusPainted": false
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 205
+					"y": 345
+					"width": 325
+					"height": 35
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 0
+				"y": 0
+				"width": 565
+				"height": 440
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 565, 470 )
+		} )
+	}
+}
