@@ -28,6 +28,24 @@ public class MainFrame extends JFrame {
         viewBooksFrame.setVisible(true);
     }
 
+    private void addEditBookBtnHandler(ActionEvent e) {
+        setEnabled(false);
+        var addEditBookFrame = new AddEditBookFrame(this);
+        addEditBookFrame.setVisible(true);
+    }
+
+    private void addEditAuthorBtnHandler(ActionEvent e) {
+        setEnabled(false);
+        var addEditAuthorFrame = new AddEditAuthorFrame(this);
+        addEditAuthorFrame.setVisible(true);
+    }
+
+    private void addEditCategoryBtnHandler(ActionEvent e) {
+        setEnabled(false);
+        var addEditCategoryFrame = new AddEditCategoryFrame(this);
+        addEditCategoryFrame.setVisible(true);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel = new JPanel();
@@ -71,6 +89,7 @@ public class MainFrame extends JFrame {
             addEditBookBtn.setFocusable(false);
             addEditBookBtn.setFocusPainted(false);
             addEditBookBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            addEditBookBtn.addActionListener(e -> addEditBookBtnHandler(e));
             panel.add(addEditBookBtn);
             addEditBookBtn.setBounds(25, 140, 370, 40);
 
@@ -83,6 +102,7 @@ public class MainFrame extends JFrame {
             addEditAuthorBtn.setFocusable(false);
             addEditAuthorBtn.setBorderPainted(false);
             addEditAuthorBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            addEditAuthorBtn.addActionListener(e -> addEditAuthorBtnHandler(e));
             panel.add(addEditAuthorBtn);
             addEditAuthorBtn.setBounds(25, 200, 370, 40);
 
@@ -95,6 +115,7 @@ public class MainFrame extends JFrame {
             addEditCategoryBtn.setFocusable(false);
             addEditCategoryBtn.setFocusPainted(false);
             addEditCategoryBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            addEditCategoryBtn.addActionListener(e -> addEditCategoryBtnHandler(e));
             panel.add(addEditCategoryBtn);
             addEditCategoryBtn.setBounds(25, 260, 370, 40);
 

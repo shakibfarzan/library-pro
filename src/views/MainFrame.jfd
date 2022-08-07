@@ -39,6 +39,7 @@ new FormModel {
 					"focusable": false
 					"focusPainted": false
 					"cursor": #Cursor0
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addEditBookBtnHandler", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 25
 					"y": 140
@@ -55,6 +56,7 @@ new FormModel {
 					"focusable": false
 					"borderPainted": false
 					"cursor": #Cursor0
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addEditAuthorBtnHandler", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 370
 					"height": 40
@@ -71,6 +73,7 @@ new FormModel {
 					"focusable": false
 					"focusPainted": false
 					"cursor": #Cursor0
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addEditCategoryBtnHandler", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 370
 					"height": 40

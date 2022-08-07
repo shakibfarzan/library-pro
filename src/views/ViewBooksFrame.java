@@ -70,11 +70,11 @@ public class ViewBooksFrame extends JFrame {
             {
 
                 //---- bookList ----
-                bookList.setBackground(new Color(251, 207, 10));
+                bookList.setBackground(new Color(255, 247, 160));
                 bookList.setForeground(new Color(53, 0, 0));
                 bookList.setVisibleRowCount(20);
                 bookList.setSelectionBackground(new Color(53, 0, 0));
-                bookList.setSelectionForeground(new Color(251, 207, 10));
+                bookList.setSelectionForeground(new Color(255, 247, 160));
                 scrollPane1.setViewportView(bookList);
             }
             panel.add(scrollPane1);
@@ -184,7 +184,7 @@ public class ViewBooksFrame extends JFrame {
 
             //---- openFileBtn ----
             openFileBtn.setText("Open File");
-            openFileBtn.setBackground(new Color(255, 247, 160));
+            openFileBtn.setBackground(new Color(251, 207, 10));
             openFileBtn.setForeground(new Color(53, 0, 0));
             openFileBtn.setBorder(null);
             openFileBtn.setBorderPainted(false);

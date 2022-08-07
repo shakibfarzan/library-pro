@@ -18,11 +18,11 @@ new FormModel {
 					name: "scrollPane1"
 					add( new FormComponent( "javax.swing.JList" ) {
 						name: "bookList"
-						"background": new java.awt.Color( 251, 207, 10, 255 )
+						"background": new java.awt.Color( 255, 247, 160, 255 )
 						"foreground": new java.awt.Color( 53, 0, 0, 255 )
 						"visibleRowCount": 20
 						"selectionBackground": new java.awt.Color( 53, 0, 0, 255 )
-						"selectionForeground": new java.awt.Color( 251, 207, 10, 255 )
+						"selectionForeground": new java.awt.Color( 255, 247, 160, 255 )
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 0
@@ -189,7 +189,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "openFileBtn"
 					"text": "Open File"
-					"background": new java.awt.Color( 255, 247, 160, 255 )
+					"background": new java.awt.Color( 251, 207, 10, 255 )
 					"foreground": new java.awt.Color( 53, 0, 0, 255 )
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"borderPainted": false

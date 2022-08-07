@@ -3,12 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2d977809-c5bb-4dca-a319-cc0e45c74adc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/program/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/program/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Generator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/library-project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AddEditBookFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AddEditBookFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AddEditBookFrame.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AddEditBookFrame.jfd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/MainFrame.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/MainFrame.jfd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ViewBooksFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ViewBooksFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ViewBooksFrame.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ViewBooksFrame.jfd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +22,7 @@
         <option value="Record" />
         <option value="Class" />
         <option value="Enum" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -93,7 +95,7 @@
       <workItem from="1659758620802" duration="243000" />
       <workItem from="1659791207678" duration="53000" />
       <workItem from="1659791275358" duration="7289000" />
-      <workItem from="1659880515828" duration="6425000" />
+      <workItem from="1659880515828" duration="13264000" />
     </task>
     <servers />
   </component>
