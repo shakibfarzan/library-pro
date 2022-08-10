@@ -26,6 +26,7 @@ public class CategoryController {
 
     public void addCategory(String name) throws Exception {
         if (categories.get(name) != null) throw new Exception("Category with name "+name+" exists!");
+        if (name.isEmpty()) throw new Exception("Category cannot be blank!");
         Category category = new Category(name);
         categories.put(name, category);
     }

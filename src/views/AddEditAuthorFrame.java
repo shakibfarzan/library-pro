@@ -4,6 +4,10 @@
 
 package views;
 
+import javax.swing.event.*;
+import controllers.AuthorController;
+import models.Author;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -13,13 +17,59 @@ import javax.swing.*;
  */
 public class AddEditAuthorFrame extends JFrame {
     private MainFrame mainFrame;
+    private Author author;
     public AddEditAuthorFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
+        updateList();
     }
 
     private void thisWindowClosing(WindowEvent e) {
         mainFrame.setEnabled(true);
+    }
+
+    private void updateList(){
+        DefaultListModel<Author> authorDefaultListModel = new DefaultListModel<>();
+        authorDefaultListModel.addAll(AuthorController.getInstance().getAuthors());
+        authorList.setModel(authorDefaultListModel);
+    }
+
+    private void authorListValueChanged(ListSelectionEvent e) {
+        this.author = (Author) authorList.getSelectedValue();
+        if (author != null){
+            firstnameTextField.setText(author.getFirstName());
+            lastnameTextField.setText(author.getLastName());
+        } else {
+            firstnameTextField.setText(null);
+            lastnameTextField.setText(null);
+        }
+    }
+
+    private void saveBtnHandler(ActionEvent e) {
+        try {
+            if (author == null) {
+                AuthorController.getInstance().addAuthor(firstnameTextField.getText(), lastnameTextField.getText());
+                firstnameTextField.setText(null);
+                lastnameTextField.setText(null);
+            } else {
+                AuthorController.getInstance().updateAuthorName(firstnameTextField.getText(), lastnameTextField.getText(), author.getId());
+            }
+            updateList();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private void removeBtnHandler(ActionEvent e) {
+        if (author != null) {
+            try {
+                AuthorController.getInstance().removeAuthorById(author.getId());
+                updateList();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     private void initComponents() {
@@ -32,6 +82,7 @@ public class AddEditAuthorFrame extends JFrame {
         saveBtn = new JButton();
         lastnameLbl = new JLabel();
         lastnameTextField = new JTextField();
+        removeBtn = new JButton();
 
         //======== this ========
         setTitle("Add/Edit Author");
@@ -61,6 +112,7 @@ public class AddEditAuthorFrame extends JFrame {
                 authorList.setVisibleRowCount(20);
                 authorList.setSelectionBackground(new Color(53, 0, 0));
                 authorList.setSelectionForeground(new Color(255, 247, 160));
+                authorList.addListSelectionListener(e -> authorListValueChanged(e));
                 scrollPane1.setViewportView(authorList);
             }
             panel.add(scrollPane1);
@@ -91,8 +143,9 @@ public class AddEditAuthorFrame extends JFrame {
             saveBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             saveBtn.setFocusable(false);
             saveBtn.setFocusPainted(false);
+            saveBtn.addActionListener(e -> saveBtnHandler(e));
             panel.add(saveBtn);
-            saveBtn.setBounds(205, 260, 325, 35);
+            saveBtn.setBounds(205, 260, 155, 35);
 
             //---- lastnameLbl ----
             lastnameLbl.setText("Last name:");
@@ -109,6 +162,19 @@ public class AddEditAuthorFrame extends JFrame {
             lastnameTextField.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
             panel.add(lastnameTextField);
             lastnameTextField.setBounds(375, 195, 155, 25);
+
+            //---- removeBtn ----
+            removeBtn.setText("Remove");
+            removeBtn.setBackground(new Color(251, 207, 10));
+            removeBtn.setForeground(new Color(53, 0, 0));
+            removeBtn.setBorder(null);
+            removeBtn.setBorderPainted(false);
+            removeBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            removeBtn.setFocusable(false);
+            removeBtn.setFocusPainted(false);
+            removeBtn.addActionListener(e -> removeBtnHandler(e));
+            panel.add(removeBtn);
+            removeBtn.setBounds(375, 260, 155, 35);
 
             {
                 // compute preferred size
@@ -156,5 +222,6 @@ public class AddEditAuthorFrame extends JFrame {
     private JButton saveBtn;
     private JLabel lastnameLbl;
     private JTextField lastnameTextField;
+    private JButton removeBtn;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

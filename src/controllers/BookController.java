@@ -28,6 +28,9 @@ public class BookController {
     }
 
     public void addBook(String title, String fileUrl, ReadingStatus readingStatus, String categoryName, int authorId) throws Exception {
+        if (title.isEmpty()) throw new Exception("Title cannot be empty!");
+        if (fileUrl.isEmpty()) throw new Exception("File cannot be empty!");
+        if (readingStatus.toString().isEmpty()) throw new Exception("Reading status cannot be empty!");
         Category category = CategoryController.getInstance().getCategoryByName(categoryName);
         Author author = AuthorController.getInstance().getAuthorById(authorId);
         Book book = new Book(title, fileUrl, category, author, readingStatus);
@@ -40,6 +43,9 @@ public class BookController {
     }
 
     public void updateBook(String title, String fileUrl, ReadingStatus readingStatus, String categoryName, int authorId, int id) throws Exception {
+        if (title.isEmpty()) throw new Exception("Title cannot be empty!");
+        if (fileUrl.isEmpty()) throw new Exception("File cannot be empty!");
+        if (readingStatus.toString().isEmpty()) throw new Exception("Reading status cannot be empty!");
         Book book = getBookById(id);
         book.setTitle(title);
         book.setFileUrl(fileUrl);

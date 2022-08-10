@@ -24,7 +24,9 @@ public class AuthorController {
         return authors.values();
     }
 
-    public void addAuthor(String firstName, String lastName) {
+    public void addAuthor(String firstName, String lastName) throws Exception {
+        if (firstName.isEmpty()) throw new Exception("Firstname cannot be blank!");
+        if (lastName.isEmpty()) throw new Exception("Lastname cannot be blank!");
         Author author = new Author(firstName, lastName);
         authors.put(author.getId(), author);
     }
@@ -35,6 +37,8 @@ public class AuthorController {
     }
 
     public void updateAuthorName(String firstName, String lastName, int id) throws Exception {
+        if (firstName.isEmpty()) throw new Exception("Firstname cannot be blank!");
+        if (lastName.isEmpty()) throw new Exception("Lastname cannot be blank!");
         Author author = getAuthorById(id);
         author.setFirstName(firstName);
         author.setLastName(lastName);

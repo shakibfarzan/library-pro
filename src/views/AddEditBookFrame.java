@@ -4,10 +4,24 @@
 
 package views;
 
+import javax.swing.event.*;
+import controllers.AuthorController;
+import controllers.BookController;
+import controllers.CategoryController;
+import models.Author;
+import models.Book;
+import models.Category;
+import models.ReadingStatus;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.util.Objects;
+import java.util.Vector;
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * @author unknown
@@ -15,13 +29,101 @@ import javax.swing.*;
 public class AddEditBookFrame extends JFrame {
 
     private MainFrame mainFrame;
+    private Book book;
     public AddEditBookFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
+        updateList();
+        fillComboBoxes();
     }
 
     private void thisWindowClosing(WindowEvent e) {
         mainFrame.setEnabled(true);
+    }
+
+    private void updateList() {
+        DefaultListModel<Book> bookDefaultListModel = new DefaultListModel<>();
+        bookDefaultListModel.addAll(BookController.getInstance().getBooks());
+        bookList.setModel(bookDefaultListModel);
+    }
+
+    private void fillComboBoxes() {
+        DefaultComboBoxModel<Category> categoryDefaultComboBoxModel = new DefaultComboBoxModel<>(CategoryController.getInstance().getCategories().toArray(new Category[0]));
+        categoryComboBox.setModel(categoryDefaultComboBoxModel);
+        DefaultComboBoxModel<Author> authorDefaultComboBoxModel = new DefaultComboBoxModel<>(AuthorController.getInstance().getAuthors().toArray(new Author[0]));
+        authorComboBox.setModel(authorDefaultComboBoxModel);
+        DefaultComboBoxModel<ReadingStatus> readingStatusDefaultComboBoxModel = new DefaultComboBoxModel<>(ReadingStatus.values());
+        readingStatusComboBox.setModel(readingStatusDefaultComboBoxModel);
+    }
+
+    private void chooseFileBtnHandler(ActionEvent e) {
+        JFileChooser fileChooser = new JFileChooser();
+        int res = fileChooser.showDialog(this, "Save");
+        FileFilter fileFilter = new FileNameExtensionFilter("PDF", "pdf");
+        fileChooser.setFileFilter(fileFilter);
+        fileChooser.addChoosableFileFilter(fileFilter);
+        fileChooser.setMultiSelectionEnabled(false);
+        File file = fileChooser.getSelectedFile();
+        if (res == JFileChooser.APPROVE_OPTION) {
+            if (fileFilter.accept(file)) {
+                fileNameLbl.setText(file.getAbsolutePath());
+            } else {
+                JOptionPane.showMessageDialog(this, "This file is not PDF!");
+            }
+        }
+    }
+
+    private void bookListValueChanged(ListSelectionEvent e) {
+        this.book = (Book) bookList.getSelectedValue();
+        if (book != null) {
+            titleTextField.setText(book.getTitle());
+            authorComboBox.setSelectedItem(book.getAuthor());
+            categoryComboBox.setSelectedItem(book.getCategory());
+            readingStatusComboBox.setSelectedItem(book.getReadingStatus());
+            fileNameLbl.setText(book.getFileUrl());
+        } else {
+            titleTextField.setText(null);
+            authorComboBox.setSelectedItem(null);
+            categoryComboBox.setSelectedItem(null);
+            readingStatusComboBox.setSelectedItem(null);
+            fileNameLbl.setText("file name");
+        }
+    }
+
+    private void saveBtnHandler(ActionEvent e) {
+        try {
+            if (book == null) {
+                BookController.getInstance().addBook(titleTextField.getText(), fileNameLbl.getText(),
+                        (ReadingStatus) readingStatusComboBox.getSelectedItem(),
+                        ((Category) Objects.requireNonNull(categoryComboBox.getSelectedItem())).getName(),
+                        ((Author) Objects.requireNonNull(authorComboBox.getSelectedItem())).getId());
+                titleTextField.setText(null);
+                authorComboBox.setSelectedItem(null);
+                categoryComboBox.setSelectedItem(null);
+                readingStatusComboBox.setSelectedItem(null);
+                fileNameLbl.setText("file name");
+            } else {
+                BookController.getInstance().updateBook(titleTextField.getText(), fileNameLbl.getText(),
+                        (ReadingStatus) readingStatusComboBox.getSelectedItem(),
+                        ((Category) Objects.requireNonNull(categoryComboBox.getSelectedItem())).getName(),
+                        ((Author) Objects.requireNonNull(authorComboBox.getSelectedItem())).getId(), book.getId());
+            }
+            updateList();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private void removeBtnHandler(ActionEvent e) {
+        if (book != null) {
+            try {
+                BookController.getInstance().removeBookById(book.getId());
+                updateList();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     private void initComponents() {
@@ -40,6 +142,7 @@ public class AddEditBookFrame extends JFrame {
         chooseFileBtn = new JButton();
         fileNameLbl = new JLabel();
         saveBtn = new JButton();
+        removeBtn = new JButton();
 
         //======== this ========
         setTitle("Add/Edit Book");
@@ -69,6 +172,7 @@ public class AddEditBookFrame extends JFrame {
                 bookList.setVisibleRowCount(20);
                 bookList.setSelectionBackground(new Color(53, 0, 0));
                 bookList.setSelectionForeground(new Color(255, 247, 160));
+                bookList.addListSelectionListener(e -> bookListValueChanged(e));
                 scrollPane1.setViewportView(bookList);
             }
             panel.add(scrollPane1);
@@ -111,8 +215,9 @@ public class AddEditBookFrame extends JFrame {
             categoryComboBox.setForeground(new Color(53, 0, 0));
             categoryComboBox.setBorder(null);
             categoryComboBox.setFocusable(false);
+            categoryComboBox.setLightWeightPopupEnabled(false);
             panel.add(categoryComboBox);
-            categoryComboBox.setBounds(370, 110, 155, 24);
+            categoryComboBox.setBounds(370, 150, 155, 24);
 
             //---- authorComboBox ----
             authorComboBox.setBackground(new Color(251, 207, 10));
@@ -120,7 +225,7 @@ public class AddEditBookFrame extends JFrame {
             authorComboBox.setBorder(null);
             authorComboBox.setFocusable(false);
             panel.add(authorComboBox);
-            authorComboBox.setBounds(370, 150, 155, 24);
+            authorComboBox.setBounds(370, 105, 155, 24);
 
             //---- readingStatusComboBox ----
             readingStatusComboBox.setBackground(new Color(251, 207, 10));
@@ -147,6 +252,7 @@ public class AddEditBookFrame extends JFrame {
             chooseFileBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             chooseFileBtn.setFocusable(false);
             chooseFileBtn.setFocusPainted(false);
+            chooseFileBtn.addActionListener(e -> chooseFileBtnHandler(e));
             panel.add(chooseFileBtn);
             chooseFileBtn.setBounds(200, 240, 110, 30);
 
@@ -167,8 +273,22 @@ public class AddEditBookFrame extends JFrame {
             saveBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             saveBtn.setFocusable(false);
             saveBtn.setFocusPainted(false);
+            saveBtn.addActionListener(e -> saveBtnHandler(e));
             panel.add(saveBtn);
-            saveBtn.setBounds(205, 350, 325, 35);
+            saveBtn.setBounds(205, 350, 155, 35);
+
+            //---- removeBtn ----
+            removeBtn.setText("Remove");
+            removeBtn.setBackground(new Color(251, 207, 10));
+            removeBtn.setForeground(new Color(53, 0, 0));
+            removeBtn.setBorder(null);
+            removeBtn.setBorderPainted(false);
+            removeBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            removeBtn.setFocusable(false);
+            removeBtn.setFocusPainted(false);
+            removeBtn.addActionListener(e -> removeBtnHandler(e));
+            panel.add(removeBtn);
+            removeBtn.setBounds(375, 350, 155, 35);
 
             {
                 // compute preferred size
@@ -222,5 +342,6 @@ public class AddEditBookFrame extends JFrame {
     private JButton chooseFileBtn;
     private JLabel fileNameLbl;
     private JButton saveBtn;
+    private JButton removeBtn;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -1,10 +1,11 @@
 package models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import static utils.Generator.idGenerator;
 
-public class Author {
+public class Author implements Serializable {
     private final int id;
     private String firstName;
     private String lastName;

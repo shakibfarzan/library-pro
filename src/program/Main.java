@@ -1,6 +1,9 @@
 package program;
 
 
+import controllers.AuthorController;
+import controllers.BookController;
+import controllers.CategoryController;
 import views.MainFrame;
 
 public class Main {

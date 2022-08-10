@@ -5,6 +5,10 @@
 package views;
 
 
+import controllers.AuthorController;
+import controllers.BookController;
+import controllers.CategoryController;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -46,6 +50,12 @@ public class MainFrame extends JFrame {
         addEditCategoryFrame.setVisible(true);
     }
 
+    private void thisWindowClosing(WindowEvent e) {
+        AuthorController.getInstance().writeToFile();
+        BookController.getInstance().writeToFile();
+        CategoryController.getInstance().writeToFile();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel = new JPanel();
@@ -58,6 +68,12 @@ public class MainFrame extends JFrame {
         setBackground(new Color(155, 168, 61));
         setTitle("My Library");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                thisWindowClosing(e);
+            }
+        });
         var contentPane = getContentPane();
         contentPane.setLayout(null);
 
